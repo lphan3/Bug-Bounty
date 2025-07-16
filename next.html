@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <title>Next level </title> -->
+  <link rel="stylesheet" href="styles.css">
+
+  
+
+<body>
+  <h1>Could you click on the button?</h1>
+
+  <p class="quote">"Great things never come from comfort zones."</p>
+  <button id="infinity-btn" class="action-btn">Click Me</button>
+  <br>
+  <div>Can you fix the layout?</div>
+  
+
+
+
+
+  <!-- Down here are the Javascripts  -->
+
+  
+
+  <script>
+    
+
+
+    // This just a checking if the quote and the button are overlapping or not
+
+
+    function checkOverlap() {
+      const quote = document.querySelector('.quote');                 // Get the quote element (with class "quote")
+      const btn = document.querySelector('.action-btn');              // Get the action button element (with class "action-btn")
+      
+      // If either element doesn't exist, exit the function
+      
+      if (!quote || !btn) return;
+      const quoteRect = quote.getBoundingClientRect();               // Get the size and position of the quote element
+      const btnRect = btn.getBoundingClientRect();                   // Get the size and position of the button element
+      
+      // Check if the quote and button rectangles DO NOT overlap
+      // If none of the sides intersect, then they're not overlapping
+      
+      const overlap = !(
+        quoteRect.right < btnRect.left ||
+        quoteRect.left > btnRect.right ||
+        quoteRect.bottom < btnRect.top ||
+        quoteRect.top > btnRect.bottom
+      );
+      // If overlap is true, add class 'overlap' to <body>
+      // If not, remove the class
+      document.body.classList.toggle('overlap', overlap);
+    }
+    window.addEventListener('resize', checkOverlap);                    // Run checkOverlap every time the window is resized
+    window.addEventListener('DOMContentLoaded', checkOverlap);          // Run checkOverlap once after the page has loaded
+
+
+    // another script???
+
+    let running = false;
+    document.getElementById('infinity-btn').addEventListener('click', function() {
+      if (running) return; // Prevent multiple sequences
+      running = true;
+      let i = 0;
+      function loopWithDelay() {
+        while (i < 3) {
+          i++;
+          const div = document.createElement('div');
+          div.textContent = 'Stop this';
+          document.body.appendChild(div);
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          if (i < 3) {
+            setTimeout(loopWithDelay, 100); // 0.1s delay - 100 ms
+          } else {
+            running = false; // Allow new sequence after finishing
+          }
+          break; // Only one iteration per timeout
+        }
+        div.textContent = 'Congrat YOU MADE IT TILL THE END. or maybe not... do you think there are other bug???';
+      }
+      loopWithDelay();
+    });
+  </script>
+</body>
+</html>

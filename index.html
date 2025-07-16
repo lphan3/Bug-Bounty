@@ -1,60 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Car Display</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f8;
-      padding: 40px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    .car-list {
-      margin-bottom: 30px;
-    }
-
-    .car-item {
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 10px 15px;
-      margin: 10px auto;
-      max-width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    select {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #888;
-    }
-  </style>
+  <title>Bug Bounty</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Car List</h1>
+  <h1>Welcome to Bug Bounty</h1>
+  <h2>When you finish fixing, there'd be the next one following up</h2>
+  <h3>First task, could you find the ghost?</h3>
 
-  <div class="car-list">
-    <div class="car-item">Toyota - Corolla</div>
-    <div class="car-item">Honda - Civic</div>
-    <div class="car-item">Ford - Mustang</div>
-    <div class="car-item">BMW - 3 Series</div>
-  </div>
+  <!-- Is the path correct???? -->
 
-  <form>
-    <label for="carSelect"><strong>Choose a car:</strong></label><br><br>
-    <select id="carSelect" name="car">
-      <option value="corolla">Toyota - Corolla</option>
-      <option value="civic">Honda - Civic</option>
-      <option value="mustang">Ford - Mustang</option>
-      <option value="bmw3">BMW - 3 Series</option>
-    </select>
-  </form>
+  <img src="ghost.gif" alt="Spooky Ghost" class="ghost-img" id="ghostImg" />
+
+  <div class="note">Can you see the ghost? I can feel it!!</div>
+  <div id="nextLevelMsg" style="display:none; font-weight:bold; margin-top:20px;">There's another Ghost could you find it?</div>
+
+
+  <!-- Why we couldn't see the image? What is the id="fun-ghost" do????  -->
+
+  <img id="fun-ghost" src="https://gifdb.com/images/high/sassy-funny-ghost-yasss-o9h11jr3mzhib4p9.gif" alt="Funny Ghost GIF" />
+  <br>
+  <img id="fun-ghost" src="image/Screenshot 2025-07-14 173159.png" alt="Find the key" />
+  
+
+
+
+
+  <!-- Down here are the Javascripts  -->
+
+  
+
+  <script>
+    
+    // When the ghost image finishes loading,
+    // show the "next level" message.
+
+    document.getElementById('ghostImg').addEventListener('load', function() {
+      document.getElementById('nextLevelMsg').style.display = 'block';
+    });
+    
+      // Get the element with ID 'fun-ghost'
+
+      const funGhost = document.getElementById('fun-ghost');
+
+      // Add a click event to the ghost
+
+      funGhost.addEventListener('click', function(e) {
+        const style = window.getComputedStyle(funGhost);            // Get the current computed style of the ghost
+        const transform = style.getPropertyValue('transform');      // Get the CSS transform value (e.g., rotation)
+
+
+      // Only allow click if there is NO rotation
+      // 'none' means no transform at all
+      // 'matrix(1, 0, 0, 1, 0, 0)' is the same as rotate(0deg)
+
+
+        if (transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)') {
+          alert('You found the key! Go to the next level!');        // Show an alert and move to the next level
+          window.location.href = 'next.html';
+        } else {
+          e.preventDefault();                                      // If ghost is rotating, block the click action
+        }
+      });
+  </script>
 </body>
 </html>
+
